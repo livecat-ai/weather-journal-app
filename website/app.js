@@ -8,7 +8,7 @@ let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
 
 
 // Post data
-const postData = async (url = '', data = {})=>{
+const postToServer = async (url = '', data = {})=>{
     // console.log(data);
         const response = await fetch(url, {
         method: 'POST',
@@ -54,20 +54,42 @@ const getWeatherFromAPI = async (url = '', zip, api_key)=>{
     }
 };
 
+const updateUI = async (url = '')=>{
+    // Make the call to the server and capture the response
+    const response = await fetch(url, {
+        method: 'GET',
+        credentials: 'same-origin',
+    });
+    try {
+        const newData = await response.json();
+        console.log(newData);
+        document.getElementById('date').innerHTML = newData.date;
+        document.getElementById('temp').innerHTML = newData.temperature;
+        document.getElementById('content').innerHTML = newData.feelings;
+        return newData;
+    } catch(error) {
+        console.log("error", error);
+    }
+};
+
 function GetPost(){
     const zipcode = document.getElementById("zip").value;
     const feelings = document.getElementById("feelings").value;
     getWeatherFromAPI(baseURL, zipcode, api_key)
         .then(function(data){
-            postData("/add", {"date": newDate,
+            postToServer("/add", {"date": newDate,
                             "temperature": data.main.temp,
                             "feelings": feelings});
         })
         .then(function(data){
-
+            updateUI("/all");
+            // document.getElementById('data').innerHTML = newData[-1].date;
+            // console.log(newData);
         }
         )
 };
+
+
 
 // Get zipcode from user
 
