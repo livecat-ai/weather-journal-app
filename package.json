@@ -1,0 +1,20 @@
+{
+  "name": "weather-journal-app",
+  "version": "1.0.0",
+  "description": "Udacity Project",
+  "main": "server.js",
+  "scripts": {
+    "test": "node server.js",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/livecat-ai/weather-journal-app.git"
+  },
+  "author": "John Lockwood",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/livecat-ai/weather-journal-app/issues"
+  },
+  "homepage": "https://github.com/livecat-ai/weather-journal-app#readme"
+}
